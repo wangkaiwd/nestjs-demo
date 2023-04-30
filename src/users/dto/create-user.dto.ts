@@ -1,6 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty } from 'class-validator';
 
 export class CreateUserDto {
+  @IsNotEmpty()
   @ApiProperty({ example: 17600347824 })
   phone: number;
 
