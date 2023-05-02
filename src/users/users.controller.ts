@@ -1,4 +1,10 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpException,
+  HttpStatus,
+  Post,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { UserService } from './user.service';
@@ -15,7 +21,8 @@ export class UsersController {
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     console.log('create', this.userService.create());
-    this.catsService.create();
-    return createUserDto;
+    throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
+    // this.catsService.create();
+    // return createUserDto;
   }
 }

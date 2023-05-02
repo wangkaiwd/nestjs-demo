@@ -7,7 +7,7 @@ export class CreateUserDto {
   phone: number;
 
   @ApiProperty({ example: 'name' })
-  name: string;
+  name?: string;
 
   @ApiProperty({ example: '12345678' })
   password: string;
