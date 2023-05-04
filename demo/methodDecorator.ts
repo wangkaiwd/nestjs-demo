@@ -1,17 +1,3 @@
-const sealed = (options: any) => {
-  console.log('options', options);
-  return (target) => {
-    console.log('target', target);
-  };
-};
-//
-// function log1(Class: BugReport) {
-//   return (...args) => {
-//     console.log(args);
-//     return new Class(...args);
-//   };
-// }
-
 function log(target, name, descriptor) {
   const original = descriptor.value;
   if (typeof original === 'function') {
@@ -30,7 +16,6 @@ function log(target, name, descriptor) {
   return descriptor;
 }
 
-// @log1
 class BugReport {
   type = 'report';
   title: string;

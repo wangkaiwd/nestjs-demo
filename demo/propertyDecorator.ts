@@ -3,8 +3,8 @@ import 'reflect-metadata';
 const formatMetadataKey = Symbol('format');
 
 function format() {
-  return (...args) => {
-    console.log('args', args);
+  return (target, propertyKey: string) => {
+    console.log('target', target.constructor, propertyKey);
   };
 }
 
