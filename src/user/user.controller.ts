@@ -7,8 +7,13 @@ import { ApiTags } from '@nestjs/swagger';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get()
+  @Get('/create')
   create() {
     return this.userService.create();
+  }
+
+  @Get('/findAll')
+  findAll() {
+    return this.userService.findAll();
   }
 }
