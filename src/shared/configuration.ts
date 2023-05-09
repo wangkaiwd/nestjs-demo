@@ -6,11 +6,14 @@ const PORT = 3306;
 const configuration = (): Configuration => {
   return {
     port: process.env.PORT || PORT,
+    env: process.env.APP_ENV as any,
     database: {
-      url: 'localhost:3306',
-      username: process.env.DATABASE_USERNAME!,
-      databaseName: process.env.DATABASE_NAME!,
-      password: process.env.DATABASE_PASSWORD!,
+      url: process.env.DB_URL!,
+      username: process.env.DB_USER!,
+      databaseName: process.env.DB_NAME!,
+      password: process.env.DB_PASS!,
+      synchronize: process.env.DB_SYNCHRONIZE as any,
+      logging: process.env.DB_LOGGING as any,
     },
   };
 };

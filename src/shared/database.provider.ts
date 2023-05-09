@@ -10,17 +10,24 @@ const DatabaseProvider: FactoryProvider<DataSource>[] = [
     provide: MONGO_DATASOURCE,
     inject: [ConfigService],
     useFactory: (configService: ConfigService<Configuration>) => {
-      const { username, password, url, databaseName } =
+      const { url, logging, synchronize } =
         configService.get<Database>('database') || {};
       const dataSource = new DataSource({
         type: 'mongodb',
         url,
-        database: databaseName,
-        entities: [path.join(__dirname, '../../**/*.mongo.entities.ts')],
-        username,
-        password,
+        entities: [path.join(__dirname, '../../../**/*.mongo.entity.js')],
+        logging,
+        synchronize,
+        useNewUrlParser: true,
       });
-      dataSource.initialize();
+      dataSource
+        .initialize()
+        .then(() => {
+          console.log('Data Source has been initialized!');
+        })
+        .catch((err) => {
+          console.error('Error during Data Source initialization', err);
+        });
       return dataSource;
     },
   },

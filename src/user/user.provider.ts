@@ -4,7 +4,7 @@ import {
   USER_REPOSITORY,
 } from '../constants/provider-tokens';
 import { DataSource } from 'typeorm';
-import User from './entities/user.mongo.entities';
+import User from './entities/user.mongo.entity';
 
 const UserProvider: FactoryProvider = {
   provide: USER_REPOSITORY,
