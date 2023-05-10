@@ -15,7 +15,8 @@ const DatabaseProvider: FactoryProvider<DataSource>[] = [
       const dataSource = new DataSource({
         type: 'mongodb',
         url,
-        entities: [path.join(__dirname, '../../../**/*.mongo.entity.js')],
+        // todo: why this need config .{js,ts} ?
+        entities: [path.join(__dirname, '../../**/*.mongo.entity.{js,ts}')],
         logging,
         synchronize,
         useNewUrlParser: true,
