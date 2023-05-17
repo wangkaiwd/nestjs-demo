@@ -1,4 +1,4 @@
-import { MONGO_DATASOURCE } from '../constants/provider-tokens';
+import { MONGO_DATASOURCE } from '../../constants/provider-tokens';
 import { ConfigService } from '@nestjs/config';
 import { FactoryProvider } from '@nestjs/common/interfaces/modules/provider.interface';
 import { Configuration, Database } from './types';

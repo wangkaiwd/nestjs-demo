@@ -2,7 +2,7 @@ import { FactoryProvider } from '@nestjs/common/interfaces/modules/provider.inte
 import {
   MONGO_DATASOURCE,
   USER_REPOSITORY,
-} from '../constants/provider-tokens';
+} from '../../constants/provider-tokens';
 import { DataSource } from 'typeorm';
 import User from './entities/user.mongo.entity';
 

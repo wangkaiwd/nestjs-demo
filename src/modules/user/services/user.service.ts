@@ -1,8 +1,9 @@
 import { MongoRepository } from 'typeorm';
-import User from './entities/user.mongo.entity';
+import User from '../entities/user.mongo.entity';
 import { Inject, Injectable } from '@nestjs/common';
-import { USER_REPOSITORY } from '../constants/provider-tokens';
-import LoggerService from '../shared/logger/logger.service';
+import { USER_REPOSITORY } from '../../../constants/provider-tokens';
+import LoggerService from '../../shared/logger/logger.service';
+import PaginationParamsDto from '../../shared/dtos/pagination-params.dto';
 
 @Injectable()
 export class UserService {
@@ -15,7 +16,6 @@ export class UserService {
   }
 
   create() {
-    this.logger.info({ message: 'create', meta: { a: 1, b: 2 } });
     return this.userRepository.save({
       name: 'hh',
       phone: 178,
@@ -23,7 +23,11 @@ export class UserService {
     });
   }
 
-  findAll() {
-    return this.userRepository.findAndCount();
+  findAll({ page, pageSize }: PaginationParamsDto) {
+    return this.userRepository.findAndCount({
+      order: { id: 'DESC' },
+      take: pageSize,
+      skip: (page - 1) * pageSize,
+    });
   }
 }
