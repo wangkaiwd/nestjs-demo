@@ -9,7 +9,8 @@ class PaginationParamsDto {
   })
   @IsNumber()
   @IsOptional()
-  @Transform(({ value }) => parseInt(value), { toClassOnly: true })
+  // need to set transform: true
+  @Transform(({ value }) => parseInt(value, 10), { toClassOnly: true })
   pageSize = 5;
 
   @ApiPropertyOptional({
@@ -18,7 +19,7 @@ class PaginationParamsDto {
   })
   @IsNumber()
   @IsOptional()
-  @Transform(({ value }) => parseInt(value), { toClassOnly: true })
+  @Transform(({ value }) => parseInt(value, 10), { toClassOnly: true })
   page = 1;
 }
 
