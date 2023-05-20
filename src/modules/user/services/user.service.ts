@@ -25,7 +25,7 @@ export class UserService {
 
   findAll({ page, pageSize }: PaginationParamsDto) {
     return this.userRepository.findAndCount({
-      order: { id: 'DESC' },
+      order: { createAt: 'DESC' },
       take: pageSize,
       skip: (page - 1) * pageSize,
     });
