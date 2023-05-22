@@ -7,6 +7,7 @@ export const generateSwaggerDocument = (app: INestApplication) => {
   const config = new DocumentBuilder()
     .setTitle(pkg.name)
     .setDescription(pkg.description)
+    .addBearerAuth()
     .setVersion(pkg.version)
     .build();
   const document = SwaggerModule.createDocument(app, config);
