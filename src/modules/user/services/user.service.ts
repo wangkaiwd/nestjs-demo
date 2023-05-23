@@ -15,14 +15,6 @@ export class UserService {
     this.logger.setContext(UserService.name);
   }
 
-  create() {
-    return this.userRepository.save({
-      name: 'hh',
-      phone: 178,
-      password: 'xxx',
-    });
-  }
-
   findAll({ page, pageSize }: PaginationParamsDto) {
     return this.userRepository.findAndCount({
       order: { createAt: 'DESC' },

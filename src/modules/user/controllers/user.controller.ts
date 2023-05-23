@@ -8,11 +8,6 @@ import PaginationParamsDto from '../../shared/dtos/pagination-params.dto';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get('/create')
-  create() {
-    return this.userService.create();
-  }
-
   @Get('/findAll')
   async findAll(@Query() query: PaginationParamsDto) {
     const [data, count] = await this.userService.findAll(query);
