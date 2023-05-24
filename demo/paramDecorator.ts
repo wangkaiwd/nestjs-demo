@@ -18,3 +18,5 @@ class User {
 const user = new User();
 
 user.print({ name: 'test', age: 12 });
+
+export {};

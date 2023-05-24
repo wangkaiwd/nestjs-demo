@@ -14,10 +14,6 @@ class CreateUserDto {
     description: 'phone number',
     example: '18600228421',
   })
-  @IsNotEmpty()
-  @IsNumber()
-  phone: number;
-
   @ApiProperty({
     description: 'account password',
     example: '123456',
