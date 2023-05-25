@@ -6,11 +6,14 @@ class User extends Common {
   @Column('text')
   name: string;
 
-  @Column('number')
-  phone: number;
-
   @Column('text')
   password: string;
+
+  @Column({
+    type: 'text',
+    select: false,
+  })
+  salt: string;
 
   // automatically set to the version of the entity(incremental number) each time you call save of entity manager of repository
   @VersionColumn({
