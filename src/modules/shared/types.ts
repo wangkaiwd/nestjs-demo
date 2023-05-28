@@ -1,3 +1,5 @@
+import jwt from 'jsonwebtoken';
+
 export interface Database {
   password: string;
   username: string;
@@ -7,8 +9,16 @@ export interface Database {
   synchronize: boolean;
 }
 
+export interface JWT {
+  secret: string;
+  signOptions: {
+    expiresIn: string;
+  };
+}
+
 export interface Configuration {
   port: string | number;
   env: 'development' | 'production';
   database: Database;
+  jwt: JWT;
 }

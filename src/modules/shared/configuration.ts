@@ -15,6 +15,12 @@ const configuration = (): Configuration => {
       synchronize: process.env.DB_SYNCHRONIZE as any,
       logging: process.env.DB_LOGGING as any,
     },
+    jwt: {
+      secret: process.env.JWT_SECRET!,
+      signOptions: {
+        expiresIn: process.env.JWT_EXPIRES_IN!,
+      },
+    },
   };
 };
 export default configuration;
