@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import { Request } from 'express';
 
 export interface Database {
   password: string;
@@ -21,4 +21,8 @@ export interface Configuration {
   env: 'development' | 'production';
   database: Database;
   jwt: JWT;
+}
+
+export interface RequestWithUser extends Request {
+  user: { id: string };
 }
