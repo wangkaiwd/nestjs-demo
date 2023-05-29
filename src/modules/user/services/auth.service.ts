@@ -3,6 +3,7 @@ import {
   Inject,
   Injectable,
   InternalServerErrorException,
+  Req,
 } from '@nestjs/common';
 import { USER_REPOSITORY } from '../../../constants/provider-tokens';
 import { encryptPassword, makeSalt } from '../../shared/utils/cryptogram';
@@ -11,6 +12,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ObjectId } from 'mongodb';
 import { MongoRepository } from 'typeorm';
 import User from '../entities/user.mongo.entity';
+import { RequestWithUser } from '../../shared/types';
 
 @Injectable()
 class AuthService {

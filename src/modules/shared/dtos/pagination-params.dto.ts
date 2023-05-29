@@ -10,6 +10,7 @@ class PaginationParamsDto {
   @IsNumber()
   @IsOptional()
   // need to set transform: true
+  // todo: understand options
   @Transform(({ value }) => parseInt(value, 10), { toClassOnly: true })
   pageSize = 5;
 
