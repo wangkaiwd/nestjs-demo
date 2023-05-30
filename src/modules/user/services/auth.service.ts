@@ -13,6 +13,7 @@ import { ObjectId } from 'mongodb';
 import { MongoRepository } from 'typeorm';
 import User from '../entities/user.mongo.entity';
 import { RequestWithUser } from '../../shared/types';
+import { Public } from '../decorators/public';
 
 @Injectable()
 class AuthService {
@@ -65,11 +66,18 @@ class AuthService {
   async login(loginDto: RegisterDto) {
     const user = await this.validate(loginDto);
     const token = this.jwtService.sign({ id: user.id });
+    await this.userRepository.update(user.id, {
+      token,
+    });
     return {
       token,
       id: user.id,
       name: user.name,
     };
+  }
+
+  async logout(userId: string) {
+    await this.userRepository.update(userId, { token: null });
   }
 }
 

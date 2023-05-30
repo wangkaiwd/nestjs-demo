@@ -13,5 +13,6 @@ export class RegisterDto {
     example: '123456',
   })
   @IsNotEmpty()
+  @IsString()
   password: string;
 }

@@ -24,6 +24,9 @@ class User extends Common {
   })
   salt: string;
 
+  @Column({ nullable: true })
+  token: string | null;
+
   // automatically set to the version of the entity(incremental number) each time you call save of entity manager of repository
   @VersionColumn({
     select: false,
