@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 class AddRoleDto {
   @ApiProperty({
@@ -7,7 +7,7 @@ class AddRoleDto {
   })
   userId: string;
 
-  @ApiProperty({
+  @ApiPropertyOptional({
     description: 'role id',
   })
   roleId: string;
