@@ -1,17 +1,8 @@
-import {
-  Column,
-  Entity,
-  ObjectId,
-  ObjectIdColumn,
-  VersionColumn,
-} from 'typeorm';
+import { Column, Entity, VersionColumn } from 'typeorm';
 import Common from '../../shared/entities/common.entity';
 
 @Entity()
 class User extends Common {
-  @ObjectIdColumn()
-  id: ObjectId;
-
   @Column('text')
   name: string;
 
@@ -26,6 +17,9 @@ class User extends Common {
 
   @Column({ nullable: true })
   token: string | null;
+
+  @Column({ nullable: true })
+  roleId?: string;
 
   // automatically set to the version of the entity(incremental number) each time you call save of entity manager of repository
   @VersionColumn({

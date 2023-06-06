@@ -1,7 +1,8 @@
 import { UserService } from '../services/user.service';
-import { Controller, Get, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import PaginationParamsDto from '../../shared/dtos/pagination-params.dto';
+import AddRoleDto from '../dtos/add-role.dto';
 
 @Controller('/user')
 @ApiTags('User')
@@ -16,5 +17,10 @@ export class UserController {
       total: count,
       ...query,
     };
+  }
+
+  @Post('/addRole')
+  addRole(@Body() addRoleDto: AddRoleDto) {
+    this.userService.addRole(addRoleDto);
   }
 }

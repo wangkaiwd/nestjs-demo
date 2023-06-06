@@ -4,6 +4,7 @@ import PaginationParamsDto from '../../shared/dtos/pagination-params.dto';
 import { USER_REPOSITORY } from '../../../constants/provider-tokens';
 import { MongoRepository } from 'typeorm';
 import User from '../entities/user.mongo.entity';
+import AddRoleDto from '../dtos/add-role.dto';
 
 @Injectable()
 export class UserService {
@@ -20,6 +21,12 @@ export class UserService {
       order: { createAt: 'DESC' },
       take: pageSize,
       skip: (page - 1) * pageSize,
+    });
+  }
+
+  addRole(addRoleDto: AddRoleDto) {
+    return this.userRepository.update(addRoleDto.userId, {
+      roleId: addRoleDto.roleId,
     });
   }
 }
