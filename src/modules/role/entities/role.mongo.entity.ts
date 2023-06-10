@@ -1,9 +1,8 @@
-import { Entity } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 import Common from '../../shared/entities/common.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString } from 'class-validator';
-
-type PermissionType = 'read' | 'write';
+import { Permission } from '../types';
 
 @Entity()
 class Role extends Common {
@@ -17,6 +16,7 @@ class Role extends Common {
   @IsString({
     message: 'role name must is string type',
   })
+  @Column()
   name: string;
 
   @ApiProperty({
@@ -26,9 +26,8 @@ class Role extends Common {
       shop: ['read'],
     },
   })
-  permission: {
-    [key: string]: PermissionType[];
-  };
+  @Column()
+  permission: Permission;
 }
 
 export default Role;

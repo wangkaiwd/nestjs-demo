@@ -9,7 +9,7 @@ class RemoveSensitiveInfoInterceptor implements NestInterceptor {
       map((res) => {
         return {
           code,
-          data: res,
+          data: res || null,
           msg: 'success',
         };
       }),

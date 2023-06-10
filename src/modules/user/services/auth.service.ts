@@ -3,7 +3,6 @@ import {
   Inject,
   Injectable,
   InternalServerErrorException,
-  Req,
 } from '@nestjs/common';
 import { USER_REPOSITORY } from '../../../constants/provider-tokens';
 import { encryptPassword, makeSalt } from '../../shared/utils/cryptogram';
@@ -12,8 +11,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ObjectId } from 'mongodb';
 import { MongoRepository } from 'typeorm';
 import User from '../entities/user.mongo.entity';
-import { RequestWithUser } from '../../shared/types';
-import { Public } from '../decorators/public';
+import { RoleService } from '../../role/role.service';
 
 @Injectable()
 class AuthService {
@@ -21,6 +19,7 @@ class AuthService {
     @Inject(USER_REPOSITORY)
     private readonly userRepository: MongoRepository<User>,
     private readonly jwtService: JwtService,
+    private readonly roleService: RoleService,
   ) {}
 
   async register(registerDto: RegisterDto) {
@@ -57,10 +56,25 @@ class AuthService {
 
   async profile(userId: string) {
     // todo: Why find by id so weird?
-    const { password, salt, ...rest } = (await this.userRepository.findOneBy({
-      _id: new ObjectId(userId),
-    }))!;
-    return rest;
+    const { password, salt, name, ...rest } =
+      (await this.userRepository.findOneBy({
+        _id: new ObjectId(userId),
+      }))!;
+    let role = {};
+    if (rest.roleId) {
+      const { id, name, ...roleRest } = (await this.roleService.findOne(
+        rest.roleId,
+      ))!;
+      role = {
+        roleName: name,
+        ...roleRest,
+      };
+    }
+    return {
+      userName: name,
+      ...rest,
+      ...role,
+    };
   }
 
   async login(loginDto: RegisterDto) {

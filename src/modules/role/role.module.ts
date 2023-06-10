@@ -8,6 +8,6 @@ import { SharedModule } from '../shared/shared.module';
   imports: [SharedModule],
   controllers: [RoleController],
   providers: [RoleService, RoleRepository],
-  // exports: [RoleRepository],
+  exports: [RoleService],
 })
 export class RoleModule {}

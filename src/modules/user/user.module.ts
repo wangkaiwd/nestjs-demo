@@ -10,9 +10,11 @@ import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { ConfigService } from '@nestjs/config';
 import { Configuration } from '../shared/types';
+import { RoleModule } from '../role/role.module';
 
 @Module({
   imports: [
+    RoleModule,
     SharedModule,
     PassportModule,
     JwtModule.registerAsync({
