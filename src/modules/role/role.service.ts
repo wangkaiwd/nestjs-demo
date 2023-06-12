@@ -27,6 +27,9 @@ export class RoleService {
   async findAll(query: PaginationParamsDto) {
     const { page, pageSize } = query;
     return await this.roleRepository.findAndCount({
+      where: {
+        isDelete: false,
+      },
       take: pageSize,
       skip: (page - 1) * pageSize,
     });
@@ -41,7 +44,12 @@ export class RoleService {
   }
 
   // how to delete column
-  remove(id: string) {
-    return this.roleRepository.update(id, { isDelete: true });
+  async remove(id: string) {
+    const user = await this.roleRepository.findOneBy(new ObjectId(id));
+    if (!user) {
+      throw new BadRequestException('User not found');
+    }
+    user.isDelete = true;
+    await this.roleRepository.update(id, user);
   }
 }

@@ -1,4 +1,5 @@
 import {
+  BeforeInsert,
   Column,
   CreateDateColumn,
   ObjectId,
@@ -16,7 +17,9 @@ abstract class Common {
   @UpdateDateColumn()
   updateAt: Date;
 
-  @Column({
+  // https://github.com/typeorm/typeorm/issues/4591
+  @Column('boolean', {
+    // todo: default value not work ?
     default: false,
     // whether to hide this column by default when making query
     select: false,
